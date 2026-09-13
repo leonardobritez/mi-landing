@@ -211,11 +211,99 @@
       padding: 2.5rem;
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 2rem; text-align: center;
+      position: relative;
+      overflow: hidden;
     }
+
+    /* Capa base del glitch sobre el contenedor */
+    .stats-box::before,
+    .stats-box::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Canal rojo */
+    .stats-box::before {
+      background: rgba(255, 0, 80, 0.04);
+      animation: aberr-r 3.5s infinite;
+    }
+
+    /* Canal cian */
+    .stats-box::after {
+      background: rgba(0, 255, 220, 0.04);
+      animation: aberr-c 3.5s infinite;
+    }
+
+    /* todo el contenido queda sobre las capas */
+    .stats-box > div { position: relative; z-index: 1; }
+
+    @keyframes aberr-r {
+      0%   { transform: translate(0, 0);      opacity: 0; }
+      5%   { transform: translate(-4px, 1px); opacity: 1; }
+      10%  { transform: translate(3px, -1px); opacity: 1; }
+      15%  { transform: translate(-2px, 2px); opacity: 0.6; }
+      20%  { transform: translate(0, 0);      opacity: 0; }
+      /* glitch rápido 2 */
+      55%  { transform: translate(0, 0);      opacity: 0; }
+      57%  { transform: translate(-5px, 0px); opacity: 1; }
+      59%  { transform: translate(4px, -2px); opacity: 1; }
+      61%  { transform: translate(0, 0);      opacity: 0; }
+      100% { transform: translate(0, 0);      opacity: 0; }
+    }
+
+    @keyframes aberr-c {
+      0%   { transform: translate(0, 0);     opacity: 0; }
+      5%   { transform: translate(4px, -1px); opacity: 1; }
+      10%  { transform: translate(-3px, 1px); opacity: 1; }
+      15%  { transform: translate(2px, -2px); opacity: 0.6; }
+      20%  { transform: translate(0, 0);      opacity: 0; }
+      /* glitch rápido 2 */
+      55%  { transform: translate(0, 0);      opacity: 0; }
+      57%  { transform: translate(5px, 0px);  opacity: 1; }
+      59%  { transform: translate(-4px, 2px); opacity: 1; }
+      61%  { transform: translate(0, 0);      opacity: 0; }
+      100% { transform: translate(0, 0);      opacity: 0; }
+    }
+
+    /* Líneas de scan que atraviesan el contenedor */
+    @keyframes scanline {
+      0%   { top: -10%; }
+      100% { top: 110%; }
+    }
+
+    .stats-box .scanline {
+      position: absolute;
+      left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(236,72,153,0.25), transparent);
+      animation: scanline 2.8s linear infinite;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Glitch sobre los números: aberración en text-shadow */
     .stat-number {
       font-size: 2.5rem; font-weight: 800;
       color: var(--fuchsia); line-height: 1;
+      animation: num-glitch 3.5s infinite;
     }
+
+    @keyframes num-glitch {
+      0%,19%,21%,54%,56%,100% {
+        text-shadow: none;
+      }
+      20% {
+        text-shadow: -3px 0 #00ffdc, 3px 0 #ff0050;
+      }
+      55% {
+        text-shadow: 3px 0 #00ffdc, -3px 0 #ff0050;
+      }
+    }
+
     .stat-label { color: var(--muted); font-size: 0.88rem; margin-top: 0.3rem; }
 
     /* ── CONTACT ── */
@@ -398,6 +486,7 @@
         </div>
       </div>
       <div class="stats-box">
+        <div class="scanline"></div>
         <div>
           <div class="stat-number" id="sn-0">+120</div>
           <div class="stat-label">Proyectos entregados</div>
