@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexaTech — Soluciones de Software</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0b0f19;
+      --bg-card:   #111827;
+      --bg-nav:    rgba(11, 15, 25, 0.92);
+      --fuchsia:   #ec4899;
+      --fuchsia-d: #be185d;
+      --text:      #f1f5f9;
+      --muted:     #94a3b8;
+      --border:    #1e293b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    header {
+      position: fixed; top: 0; left: 0; width: 100%;
+      background: var(--bg-nav);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+    }
+    nav {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.5rem; height: 64px;
+    }
+    .logo {
+      font-size: 1.35rem; font-weight: 700; letter-spacing: -0.5px;
+      color: var(--text); text-decoration: none;
+    }
+    .logo span { color: var(--fuchsia); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .btn-nav {
+      background: var(--fuchsia); color: #fff;
+      padding: 0.45rem 1.1rem; border-radius: 6px;
+      font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-nav:hover { background: var(--fuchsia-d); }
+
+    /* hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; flex-direction: column; gap: 0;
+      background: var(--bg-nav); border-top: 1px solid var(--border);
+      padding: 1rem 1.5rem 1.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--muted); text-decoration: none;
+      padding: 0.6rem 0; font-size: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:last-child { border-bottom: none; margin-top: 0.75rem; }
+    .mobile-menu .btn-nav { display: inline-block; text-align: center; width: 100%; }
+
+    /* ── HERO ── */
+    #inicio {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(236,72,153,.18) 0%, transparent 70%),
+        var(--bg);
+    }
+    .hero-inner { max-width: 760px; }
+    .hero-badge {
+      display: inline-block;
+      border: 1px solid var(--fuchsia);
+      color: var(--fuchsia); font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 0.3rem 0.9rem; border-radius: 50px; margin-bottom: 1.5rem;
+    }
+    .hero-inner h1 {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 800; line-height: 1.15; letter-spacing: -1px;
+      margin-bottom: 1.25rem;
+    }
+    .hero-inner h1 span { color: var(--fuchsia); }
+    #hero-title .hw { white-space: nowrap; }
+    #hero-title .hw.fuchsia { color: var(--fuchsia); }
+    .hero-inner p {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--muted); max-width: 560px; margin: 0 auto 2.25rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--fuchsia); color: #fff;
+      padding: 0.75rem 1.8rem; border-radius: 8px;
+      font-size: 1rem; font-weight: 700;
+      text-decoration: none; transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--fuchsia-d); transform: translateY(-1px); }
+
+    .btn-outline {
+      border: 2px solid var(--fuchsia); color: var(--fuchsia);
+      padding: 0.72rem 1.8rem; border-radius: 8px;
+      font-size: 1rem; font-weight: 700;
+      text-decoration: none; transition: background 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-outline:hover {
+      background: var(--fuchsia); color: #fff; transform: translateY(-1px);
+    }
+
+    /* ── SECTIONS COMMON ── */
+    section { padding: 5rem 1.5rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      display: block; color: var(--fuchsia);
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.75rem;
+    }
+    .section-sub {
+      color: var(--muted); font-size: 1rem;
+      max-width: 560px; margin-bottom: 3rem;
+    }
+
+    /* ── SERVICES ── */
+    #soluciones { background: #0d1120; }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .card:hover { border-color: var(--fuchsia); transform: translateY(-4px); }
+    .card-icon {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: rgba(236,72,153,.15);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .card-icon svg { width: 24px; height: 24px; stroke: var(--fuchsia); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .card p { color: var(--muted); font-size: 0.93rem; line-height: 1.65; }
+
+    /* ── WHY US ── */
+    #sobre-nosotros { background: var(--bg); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: center;
+    }
+    .why-text p { color: var(--muted); margin-bottom: 2rem; }
+    .why-features { display: flex; flex-direction: column; gap: 1.2rem; }
+    .feature-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .feature-dot {
+      flex-shrink: 0; width: 10px; height: 10px;
+      border-radius: 50%; background: var(--fuchsia); margin-top: 6px;
+    }
+    .feature-item strong { display: block; font-weight: 700; margin-bottom: 0.2rem; }
+    .feature-item span { color: var(--muted); font-size: 0.93rem; }
+
+    .stats-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2rem; text-align: center;
+    }
+    .stat-number {
+      font-size: 2.5rem; font-weight: 800;
+      color: var(--fuchsia); line-height: 1;
+    }
+    .stat-label { color: var(--muted); font-size: 0.88rem; margin-top: 0.3rem; }
+
+    /* ── CONTACT ── */
+    #contacto { background: #0d1120; }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 3rem; align-items: start;
+    }
+    .contact-info p { color: var(--muted); margin-bottom: 2rem; }
+    .contact-detail {
+      display: flex; gap: 0.85rem; align-items: center; margin-bottom: 1rem;
+    }
+    .contact-detail svg { width: 20px; height: 20px; stroke: var(--fuchsia); fill: none; stroke-width: 1.8; flex-shrink: 0; }
+    .contact-detail span { color: var(--muted); font-size: 0.93rem; }
+
+    form { display: flex; flex-direction: column; gap: 1rem; }
+    form label { font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-bottom: 0.3rem; }
+    .field { display: flex; flex-direction: column; }
+    form input, form textarea {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text);
+      padding: 0.75rem 1rem; font-size: 0.95rem;
+      font-family: inherit; outline: none;
+      transition: border-color 0.2s;
+    }
+    form input:focus, form textarea:focus { border-color: var(--fuchsia); }
+    form textarea { resize: vertical; min-height: 130px; }
+    form input::placeholder, form textarea::placeholder { color: #475569; }
+    .btn-submit {
+      background: var(--fuchsia); color: #fff;
+      padding: 0.8rem; border: none; border-radius: 8px;
+      font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+      font-family: inherit;
+    }
+    .btn-submit:hover { background: var(--fuchsia-d); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080c14;
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; flex-wrap: wrap;
+      align-items: center; justify-content: space-between;
+      gap: 1rem;
+    }
+    .footer-logo { color: var(--text); font-weight: 700; font-size: 1rem; }
+    .footer-logo span { color: var(--fuchsia); }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--fuchsia); }
+    .footer-copy { color: #334155; font-size: 0.82rem; width: 100%; text-align: center; margin-top: 1.25rem; border-top: 1px solid var(--border); padding-top: 1.25rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links, nav > .btn-nav { display: none; }
+      .hamburger { display: flex; }
+      .why-grid { grid-template-columns: 1fr; }
+      .stats-box { order: -1; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ────────── HEADER ────────── -->
+<header>
+  <nav>
+    <a href="#inicio" class="logo">Nexa<span>Tech</span></a>
+    <ul class="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#soluciones">Soluciones</a></li>
+      <li><a href="#sobre-nosotros">Nosotros</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="#contacto" class="btn-nav">Hablemos</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#inicio">Inicio</a>
+    <a href="#soluciones">Soluciones</a>
+    <a href="#sobre-nosotros">Nosotros</a>
+    <a href="#contacto">Contacto</a>
+    <a href="#contacto" class="btn-nav">Hablemos</a>
+  </div>
+</header>
+
+<!-- ────────── HERO ────────── -->
+<section id="inicio">
+  <div class="hero-inner">
+    <span class="hero-badge">Innovación · Software · Tecnología</span>
+    <h1 id="hero-title" aria-label="Construimos el software que impulsa tu negocio">
+      <span class="hw">Construimos</span>
+      <span class="hw">el</span>
+      <span class="hw">software</span>
+      <span class="hw">que</span>
+      <span class="hw fuchsia">impulsa</span>
+      <span class="hw fuchsia">tu</span>
+      <span class="hw fuchsia">negocio</span>
+    </h1>
+    <p>Desarrollamos soluciones digitales a medida: plataformas web, aplicaciones móviles y sistemas empresariales que escalan con vos.</p>
+    <div class="hero-btns">
+      <a href="#soluciones" class="btn-primary">Ver soluciones</a>
+      <a href="#contacto" class="btn-outline">Contactar ahora</a>
+    </div>
+  </div>
+</section>
+
+<!-- ────────── SOLUCIONES ────────── -->
+<section id="soluciones">
+  <div class="section-inner">
+    <span class="section-label">Lo que hacemos</span>
+    <h2 class="section-title">Nuestras soluciones</h2>
+    <p class="section-sub">Cada producto está pensado para resolver un problema real con tecnología de punta y diseño cuidado.</p>
+    <div class="cards-grid">
+
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Desarrollo Web a medida</h3>
+        <p>Plataformas y aplicaciones web modernas, rápidas y escalables, construidas con las tecnologías más actuales del mercado.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <h3>Apps Móviles</h3>
+        <p>Aplicaciones nativas e híbridas para iOS y Android con experiencias de usuario fluidas y rendimiento optimizado.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Sistemas Empresariales</h3>
+        <p>ERPs, CRMs y dashboards de gestión personalizados que automatizan procesos y centralizan la información de tu empresa.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ────────── SOBRE NOSOTROS ────────── -->
+<section id="sobre-nosotros">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div class="why-text">
+        <span class="section-label">Por qué elegirnos</span>
+        <h2 class="section-title">Tecnología seria. Resultados reales.</h2>
+        <p>Somos un equipo de ingenieros y diseñadores apasionados por construir productos digitales que marcan la diferencia. Combinamos metodologías ágiles con arquitecturas modernas para entregar en tiempo y con calidad.</p>
+        <div class="why-features">
+          <div class="feature-item">
+            <div class="feature-dot"></div>
+            <div>
+              <strong>Equipo senior con experiencia probada</strong>
+              <span>Más de 8 años desarrollando soluciones para startups, pymes y corporaciones en distintas industrias.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-dot"></div>
+            <div>
+              <strong>Arquitectura escalable desde el día uno</strong>
+              <span>Diseñamos pensando en el crecimiento: tu plataforma está lista para soportar 10 usuarios o 10 millones.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-dot"></div>
+            <div>
+              <strong>Comunicación transparente y ágil</strong>
+              <span>Sprints semanales, demos frecuentes y acceso directo al equipo. Nada de cajas negras.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="stats-box">
+        <div>
+          <div class="stat-number" id="sn-0">+120</div>
+          <div class="stat-label">Proyectos entregados</div>
+        </div>
+        <div>
+          <div class="stat-number" id="sn-1">8+</div>
+          <div class="stat-label">Años de experiencia</div>
+        </div>
+        <div>
+          <div class="stat-number" id="sn-2">98%</div>
+          <div class="stat-label">Clientes satisfechos</div>
+        </div>
+        <div>
+          <div class="stat-number" id="sn-3">15</div>
+          <div class="stat-label">Ingenieros en el equipo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────── CONTACTO ────────── -->
+<section id="contacto">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="section-label">Hablemos</span>
+        <h2 class="section-title">¿Tenés un proyecto en mente?</h2>
+        <p>Contanos tu idea y te respondemos en menos de 24 hs con una propuesta inicial sin compromiso.</p>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>hola@nexatech.com</span>
+        </div>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82 19.79 19.79 0 01.4 1.21 2 2 0 012.39-.01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <span>+54 11 5555-0000</span>
+        </div>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Buenos Aires, Argentina</span>
+        </div>
+      </div>
+
+      <form id="contact-form">
+        <div class="field">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Juan Pérez" required />
+        </div>
+        <div class="field">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="juan@empresa.com" required />
+        </div>
+        <div class="field">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" placeholder="Contanos sobre tu proyecto..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Enviar mensaje →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ────────── FOOTER ────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexa<span>Tech</span></div>
+    <div class="footer-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#soluciones">Soluciones</a>
+      <a href="#sobre-nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <p class="footer-copy">© 2025 NexaTech. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  // Menú hamburguesa
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+  });
+
+  // Cerrar menú al hacer clic en un enlace
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+    });
+  });
+
+  // Formulario: feedback simple
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.btn-submit');
+    btn.textContent = '¡Mensaje enviado! ✓';
+    btn.style.background = '#16a34a';
+    this.reset();
+    setTimeout(() => {
+      btn.textContent = 'Enviar mensaje →';
+      btn.style.background = '';
+    }, 3500);
+  });
+
+  // ── Carga Anime.js v4 (una sola vez para ambas animaciones) ──
+  (function () {
+    // ── 1. Animación hero title ──
+    const words = document.querySelectorAll('#hero-title .hw');
+    words.forEach(w => {
+      w.style.display = 'inline-block';
+      w.style.opacity = '0';
+      w.style.transform = 'translateY(32px)';
+    });
+
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/animejs@4.0.0/lib/anime.iife.min.js';
+    script.onload = function () {
+
+      // Hero title: aparición palabra por palabra
+      anime.animate('#hero-title .hw', {
+        opacity:    [0, 1],
+        translateY: [32, 0],
+        delay:      anime.stagger(90, { start: 200 }),
+        duration:   700,
+        ease:       'outExpo',
+      });
+
+      // ── 2. Stats: SplitText loop infinito por caracteres ──
+      const statIds = ['sn-0', 'sn-1', 'sn-2', 'sn-3'];
+
+      statIds.forEach((id, index) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        // Dividimos el texto en spans por carácter manualmente
+        const originalText = el.textContent.trim();
+        el.innerHTML = originalText
+          .split('')
+          .map(ch => `<span class="sc">${ch === ' ' ? '&nbsp;' : ch}</span>`)
+          .join('');
+
+        const chars = el.querySelectorAll('.sc');
+
+        // Función que ejecuta el ciclo completo y se llama a sí misma
+        function loopAnim() {
+          anime.animate(chars, {
+            translateY:  [0, -18, 0],
+            color:       ['#ec4899', '#ffffff', '#ec4899'],
+            delay:       anime.stagger(80, { start: index * 180 }),
+            duration:    900,
+            ease:        'inOutSine',
+            onComplete:  function () {
+              // Pausa de 2.5 s antes de repetir
+              setTimeout(loopAnim, 2500);
+            }
+          });
+        }
+
+        // Arranca con un delay inicial escalonado por stat
+        setTimeout(loopAnim, 800 + index * 300);
+      });
+
+    };
+    document.head.appendChild(script);
+  })();
+</script>
+</body>
+</html>
