@@ -1,9 +1,34 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" id="html-root">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NexaTech — Soluciones de Software</title>
+  <style>
+    /* ── LANG SWITCHER ── */
+    .lang-switcher {
+      display: flex; align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 6px; overflow: hidden;
+      margin-left: 1rem; flex-shrink: 0;
+    }
+    .lang-switcher button {
+      background: none; border: none;
+      color: var(--muted); font-size: 0.8rem; font-weight: 700;
+      padding: 0.3rem 0.65rem; cursor: pointer;
+      letter-spacing: 0.5px; transition: background 0.18s, color 0.18s;
+      font-family: inherit;
+    }
+    .lang-switcher button:first-child {
+      border-right: 1px solid var(--border);
+    }
+    .lang-switcher button.active {
+      background: var(--fuchsia); color: #fff;
+    }
+    .lang-switcher button:not(.active):hover {
+      background: var(--border); color: var(--text);
+    }
+  </style>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -377,30 +402,34 @@
   <nav>
     <a href="#inicio" class="logo">Nexa<span>Tech</span></a>
     <ul class="nav-links">
-      <li><a href="#inicio">Inicio</a></li>
-      <li><a href="#soluciones">Soluciones</a></li>
-      <li><a href="#sobre-nosotros">Nosotros</a></li>
-      <li><a href="#contacto">Contacto</a></li>
-      <li><a href="#contacto" class="btn-nav">Hablemos</a></li>
+      <li><a href="#inicio"         data-i18n="nav.home">Inicio</a></li>
+      <li><a href="#soluciones"     data-i18n="nav.solutions">Soluciones</a></li>
+      <li><a href="#sobre-nosotros" data-i18n="nav.about">Nosotros</a></li>
+      <li><a href="#contacto"       data-i18n="nav.contact">Contacto</a></li>
+      <li><a href="#contacto" class="btn-nav" data-i18n="nav.cta">Hablemos</a></li>
     </ul>
+    <div class="lang-switcher">
+      <button id="btn-es" class="active" onclick="setLang('es')">ES</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
     <button class="hamburger" id="hamburger" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
   </nav>
   <div class="mobile-menu" id="mobile-menu">
-    <a href="#inicio">Inicio</a>
-    <a href="#soluciones">Soluciones</a>
-    <a href="#sobre-nosotros">Nosotros</a>
-    <a href="#contacto">Contacto</a>
-    <a href="#contacto" class="btn-nav">Hablemos</a>
+    <a href="#inicio"          data-i18n="nav.home">Inicio</a>
+    <a href="#soluciones"      data-i18n="nav.solutions">Soluciones</a>
+    <a href="#sobre-nosotros"  data-i18n="nav.about">Nosotros</a>
+    <a href="#contacto"        data-i18n="nav.contact">Contacto</a>
+    <a href="#contacto" class="btn-nav" data-i18n="nav.cta">Hablemos</a>
   </div>
 </header>
 
 <!-- ────────── HERO ────────── -->
 <section id="inicio">
   <div class="hero-inner">
-    <span class="hero-badge">Innovación · Software · Tecnología</span>
-    <h1 id="hero-title" aria-label="Construimos el software que impulsa tu negocio">
+    <span class="hero-badge" data-i18n="hero.badge">Innovación · Software · Tecnología</span>
+    <h1 id="hero-title" data-i18n-hero="hero.title">
       <span class="hw">Construimos</span>
       <span class="hw">el</span>
       <span class="hw">software</span>
@@ -409,10 +438,10 @@
       <span class="hw fuchsia">tu</span>
       <span class="hw fuchsia">negocio</span>
     </h1>
-    <p>Desarrollamos soluciones digitales a medida: plataformas web, aplicaciones móviles y sistemas empresariales que escalan con vos.</p>
+    <p data-i18n="hero.sub">Desarrollamos soluciones digitales a medida: plataformas web, aplicaciones móviles y sistemas empresariales que escalan con vos.</p>
     <div class="hero-btns">
-      <a href="#soluciones" class="btn-primary">Ver soluciones</a>
-      <a href="#contacto" class="btn-outline">Contactar ahora</a>
+      <a href="#soluciones" class="btn-primary" data-i18n="hero.btn1">Ver soluciones</a>
+      <a href="#contacto" class="btn-outline"   data-i18n="hero.btn2">Contactar ahora</a>
     </div>
   </div>
 </section>
@@ -420,33 +449,33 @@
 <!-- ────────── SOLUCIONES ────────── -->
 <section id="soluciones">
   <div class="section-inner">
-    <span class="section-label">Lo que hacemos</span>
-    <h2 class="section-title">Nuestras soluciones</h2>
-    <p class="section-sub">Cada producto está pensado para resolver un problema real con tecnología de punta y diseño cuidado.</p>
+    <span class="section-label" data-i18n="sol.label">Lo que hacemos</span>
+    <h2 class="section-title"   data-i18n="sol.title">Nuestras soluciones</h2>
+    <p class="section-sub"      data-i18n="sol.sub">Cada producto está pensado para resolver un problema real con tecnología de punta y diseño cuidado.</p>
     <div class="cards-grid">
 
       <div class="card">
         <div class="card-icon">
           <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
-        <h3>Desarrollo Web a medida</h3>
-        <p>Plataformas y aplicaciones web modernas, rápidas y escalables, construidas con las tecnologías más actuales del mercado.</p>
+        <h3 data-i18n="sol.c1.title">Desarrollo Web a medida</h3>
+        <p  data-i18n="sol.c1.body">Plataformas y aplicaciones web modernas, rápidas y escalables, construidas con las tecnologías más actuales del mercado.</p>
       </div>
 
       <div class="card">
         <div class="card-icon">
           <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
         </div>
-        <h3>Apps Móviles</h3>
-        <p>Aplicaciones nativas e híbridas para iOS y Android con experiencias de usuario fluidas y rendimiento optimizado.</p>
+        <h3 data-i18n="sol.c2.title">Apps Móviles</h3>
+        <p  data-i18n="sol.c2.body">Aplicaciones nativas e híbridas para iOS y Android con experiencias de usuario fluidas y rendimiento optimizado.</p>
       </div>
 
       <div class="card">
         <div class="card-icon">
           <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
-        <h3>Sistemas Empresariales</h3>
-        <p>ERPs, CRMs y dashboards de gestión personalizados que automatizan procesos y centralizan la información de tu empresa.</p>
+        <h3 data-i18n="sol.c3.title">Sistemas Empresariales</h3>
+        <p  data-i18n="sol.c3.body">ERPs, CRMs y dashboards de gestión personalizados que automatizan procesos y centralizan la información de tu empresa.</p>
       </div>
 
     </div>
@@ -458,29 +487,29 @@
   <div class="section-inner">
     <div class="why-grid">
       <div class="why-text">
-        <span class="section-label">Por qué elegirnos</span>
-        <h2 class="section-title">Tecnología seria. Resultados reales.</h2>
-        <p>Somos un equipo de ingenieros y diseñadores apasionados por construir productos digitales que marcan la diferencia. Combinamos metodologías ágiles con arquitecturas modernas para entregar en tiempo y con calidad.</p>
+        <span class="section-label" data-i18n="why.label">Por qué elegirnos</span>
+        <h2 class="section-title"   data-i18n="why.title">Tecnología seria. Resultados reales.</h2>
+        <p data-i18n="why.body">Somos un equipo de ingenieros y diseñadores apasionados por construir productos digitales que marcan la diferencia. Combinamos metodologías ágiles con arquitecturas modernas para entregar en tiempo y con calidad.</p>
         <div class="why-features">
           <div class="feature-item">
             <div class="feature-dot"></div>
             <div>
-              <strong>Equipo senior con experiencia probada</strong>
-              <span>Más de 8 años desarrollando soluciones para startups, pymes y corporaciones en distintas industrias.</span>
+              <strong data-i18n="why.f1.title">Equipo senior con experiencia probada</strong>
+              <span   data-i18n="why.f1.body">Más de 8 años desarrollando soluciones para startups, pymes y corporaciones en distintas industrias.</span>
             </div>
           </div>
           <div class="feature-item">
             <div class="feature-dot"></div>
             <div>
-              <strong>Arquitectura escalable desde el día uno</strong>
-              <span>Diseñamos pensando en el crecimiento: tu plataforma está lista para soportar 10 usuarios o 10 millones.</span>
+              <strong data-i18n="why.f2.title">Arquitectura escalable desde el día uno</strong>
+              <span   data-i18n="why.f2.body">Diseñamos pensando en el crecimiento: tu plataforma está lista para soportar 10 usuarios o 10 millones.</span>
             </div>
           </div>
           <div class="feature-item">
             <div class="feature-dot"></div>
             <div>
-              <strong>Comunicación transparente y ágil</strong>
-              <span>Sprints semanales, demos frecuentes y acceso directo al equipo. Nada de cajas negras.</span>
+              <strong data-i18n="why.f3.title">Comunicación transparente y ágil</strong>
+              <span   data-i18n="why.f3.body">Sprints semanales, demos frecuentes y acceso directo al equipo. Nada de cajas negras.</span>
             </div>
           </div>
         </div>
@@ -489,19 +518,19 @@
         <div class="scanline"></div>
         <div>
           <div class="stat-number" id="sn-0">+120</div>
-          <div class="stat-label">Proyectos entregados</div>
+          <div class="stat-label" data-i18n="why.s1">Proyectos entregados</div>
         </div>
         <div>
           <div class="stat-number" id="sn-1">8+</div>
-          <div class="stat-label">Años de experiencia</div>
+          <div class="stat-label" data-i18n="why.s2">Años de experiencia</div>
         </div>
         <div>
           <div class="stat-number" id="sn-2">98%</div>
-          <div class="stat-label">Clientes satisfechos</div>
+          <div class="stat-label" data-i18n="why.s3">Clientes satisfechos</div>
         </div>
         <div>
           <div class="stat-number" id="sn-3">15</div>
-          <div class="stat-label">Ingenieros en el equipo</div>
+          <div class="stat-label" data-i18n="why.s4">Ingenieros en el equipo</div>
         </div>
       </div>
     </div>
@@ -513,9 +542,9 @@
   <div class="section-inner">
     <div class="contact-grid">
       <div class="contact-info">
-        <span class="section-label">Hablemos</span>
-        <h2 class="section-title">¿Tenés un proyecto en mente?</h2>
-        <p>Contanos tu idea y te respondemos en menos de 24 hs con una propuesta inicial sin compromiso.</p>
+        <span class="section-label" data-i18n="contact.label">Hablemos</span>
+        <h2 class="section-title"   data-i18n="contact.title">¿Tenés un proyecto en mente?</h2>
+        <p data-i18n="contact.body">Contanos tu idea y te respondemos en menos de 24 hs con una propuesta inicial sin compromiso.</p>
         <div class="contact-detail">
           <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           <span>hola@nexatech.com</span>
@@ -532,18 +561,18 @@
 
       <form id="contact-form">
         <div class="field">
-          <label for="nombre">Nombre completo</label>
-          <input type="text" id="nombre" name="nombre" placeholder="Juan Pérez" required />
+          <label for="nombre" data-i18n="contact.f.name">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" data-i18n-ph="contact.f.namePh" placeholder="Juan Pérez" required />
         </div>
         <div class="field">
-          <label for="email">Correo electrónico</label>
+          <label for="email" data-i18n="contact.f.email">Correo electrónico</label>
           <input type="email" id="email" name="email" placeholder="juan@empresa.com" required />
         </div>
         <div class="field">
-          <label for="mensaje">Mensaje</label>
-          <textarea id="mensaje" name="mensaje" placeholder="Contanos sobre tu proyecto..." required></textarea>
+          <label for="mensaje" data-i18n="contact.f.msg">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" data-i18n-ph="contact.f.msgPh" placeholder="Contanos sobre tu proyecto..." required></textarea>
         </div>
-        <button type="submit" class="btn-submit">Enviar mensaje →</button>
+        <button type="submit" class="btn-submit" data-i18n="contact.f.send">Enviar mensaje →</button>
       </form>
     </div>
   </div>
@@ -554,15 +583,165 @@
   <div class="footer-inner">
     <div class="footer-logo">Nexa<span>Tech</span></div>
     <div class="footer-links">
-      <a href="#inicio">Inicio</a>
-      <a href="#soluciones">Soluciones</a>
-      <a href="#sobre-nosotros">Nosotros</a>
-      <a href="#contacto">Contacto</a>
+      <a href="#inicio"         data-i18n="nav.home">Inicio</a>
+      <a href="#soluciones"     data-i18n="nav.solutions">Soluciones</a>
+      <a href="#sobre-nosotros" data-i18n="nav.about">Nosotros</a>
+      <a href="#contacto"       data-i18n="nav.contact">Contacto</a>
     </div>
-    <p class="footer-copy">© 2025 NexaTech. Todos los derechos reservados.</p>
+    <p class="footer-copy" data-i18n="footer.copy">© 2025 NexaTech. Todos los derechos reservados.</p>
   </div>
 </footer>
 
+<script>
+  // ── i18n ──────────────────────────────────────────────────────────────
+  const TRANSLATIONS = {
+    es: {
+      'nav.home':        'Inicio',
+      'nav.solutions':   'Soluciones',
+      'nav.about':       'Nosotros',
+      'nav.contact':     'Contacto',
+      'nav.cta':         'Hablemos',
+
+      'hero.badge': 'Innovación · Software · Tecnología',
+      'hero.title': 'Construimos el software que {impulsa tu negocio}',
+      'hero.sub':   'Desarrollamos soluciones digitales a medida: plataformas web, aplicaciones móviles y sistemas empresariales que escalan con vos.',
+      'hero.btn1':  'Ver soluciones',
+      'hero.btn2':  'Contactar ahora',
+
+      'sol.label':    'Lo que hacemos',
+      'sol.title':    'Nuestras soluciones',
+      'sol.sub':      'Cada producto está pensado para resolver un problema real con tecnología de punta y diseño cuidado.',
+      'sol.c1.title': 'Desarrollo Web a medida',
+      'sol.c1.body':  'Plataformas y aplicaciones web modernas, rápidas y escalables, construidas con las tecnologías más actuales del mercado.',
+      'sol.c2.title': 'Apps Móviles',
+      'sol.c2.body':  'Aplicaciones nativas e híbridas para iOS y Android con experiencias de usuario fluidas y rendimiento optimizado.',
+      'sol.c3.title': 'Sistemas Empresariales',
+      'sol.c3.body':  'ERPs, CRMs y dashboards de gestión personalizados que automatizan procesos y centralizan la información de tu empresa.',
+
+      'why.label':   'Por qué elegirnos',
+      'why.title':   'Tecnología seria. Resultados reales.',
+      'why.body':    'Somos un equipo de ingenieros y diseñadores apasionados por construir productos digitales que marcan la diferencia. Combinamos metodologías ágiles con arquitecturas modernas para entregar en tiempo y con calidad.',
+      'why.f1.title':'Equipo senior con experiencia probada',
+      'why.f1.body': 'Más de 8 años desarrollando soluciones para startups, pymes y corporaciones en distintas industrias.',
+      'why.f2.title':'Arquitectura escalable desde el día uno',
+      'why.f2.body': 'Diseñamos pensando en el crecimiento: tu plataforma está lista para soportar 10 usuarios o 10 millones.',
+      'why.f3.title':'Comunicación transparente y ágil',
+      'why.f3.body': 'Sprints semanales, demos frecuentes y acceso directo al equipo. Nada de cajas negras.',
+      'why.s1': 'Proyectos entregados',
+      'why.s2': 'Años de experiencia',
+      'why.s3': 'Clientes satisfechos',
+      'why.s4': 'Ingenieros en el equipo',
+
+      'contact.label': 'Hablemos',
+      'contact.title': '¿Tenés un proyecto en mente?',
+      'contact.body':  'Contanos tu idea y te respondemos en menos de 24 hs con una propuesta inicial sin compromiso.',
+      'contact.f.name':   'Nombre completo',
+      'contact.f.namePh': 'Juan Pérez',
+      'contact.f.email':  'Correo electrónico',
+      'contact.f.msg':    'Mensaje',
+      'contact.f.msgPh':  'Contanos sobre tu proyecto...',
+      'contact.f.send':   'Enviar mensaje →',
+      'contact.sent':     '¡Mensaje enviado! ✓',
+
+      'footer.copy': '© 2025 NexaTech. Todos los derechos reservados.',
+    },
+    en: {
+      'nav.home':        'Home',
+      'nav.solutions':   'Solutions',
+      'nav.about':       'About',
+      'nav.contact':     'Contact',
+      'nav.cta':         "Let's talk",
+
+      'hero.badge': 'Innovation · Software · Technology',
+      'hero.title': 'We build the software that {drives your business}',
+      'hero.sub':   'We develop custom digital solutions: web platforms, mobile apps, and enterprise systems that scale with you.',
+      'hero.btn1':  'See solutions',
+      'hero.btn2':  'Contact us',
+
+      'sol.label':    'What we do',
+      'sol.title':    'Our solutions',
+      'sol.sub':      'Every product is designed to solve a real problem with cutting-edge technology and thoughtful design.',
+      'sol.c1.title': 'Custom Web Development',
+      'sol.c1.body':  'Modern, fast, and scalable web platforms and applications built with the latest technologies on the market.',
+      'sol.c2.title': 'Mobile Apps',
+      'sol.c2.body':  'Native and hybrid applications for iOS and Android with smooth user experiences and optimized performance.',
+      'sol.c3.title': 'Enterprise Systems',
+      'sol.c3.body':  'Custom ERPs, CRMs, and management dashboards that automate processes and centralize your company data.',
+
+      'why.label':   'Why choose us',
+      'why.title':   'Serious technology. Real results.',
+      'why.body':    'We are a team of passionate engineers and designers building digital products that make a difference. We combine agile methodologies with modern architectures to deliver on time and with quality.',
+      'why.f1.title':'Senior team with proven experience',
+      'why.f1.body': 'Over 8 years building solutions for startups, SMEs, and corporations across different industries.',
+      'why.f2.title':'Scalable architecture from day one',
+      'why.f2.body': 'We design with growth in mind: your platform is ready to handle 10 users or 10 million.',
+      'why.f3.title':'Transparent and agile communication',
+      'why.f3.body': 'Weekly sprints, frequent demos, and direct access to the team. No black boxes.',
+      'why.s1': 'Projects delivered',
+      'why.s2': 'Years of experience',
+      'why.s3': 'Satisfied clients',
+      'why.s4': 'Engineers on the team',
+
+      'contact.label': "Let's talk",
+      'contact.title': 'Do you have a project in mind?',
+      'contact.body':  'Tell us your idea and we will get back to you within 24 hours with an initial proposal, no commitment needed.',
+      'contact.f.name':   'Full name',
+      'contact.f.namePh': 'John Smith',
+      'contact.f.email':  'Email address',
+      'contact.f.msg':    'Message',
+      'contact.f.msgPh':  'Tell us about your project...',
+      'contact.f.send':   'Send message →',
+      'contact.sent':     'Message sent! ✓',
+
+      'footer.copy': '© 2025 NexaTech. All rights reserved.',
+    }
+  };
+
+  let currentLang = 'es';
+
+  function setLang(lang) {
+    currentLang = lang;
+    const t = TRANSLATIONS[lang];
+    document.getElementById('html-root').lang = lang;
+
+    // Botones activos
+    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+    // Textos normales
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.textContent = t[key];
+    });
+
+    // Placeholders
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const key = el.getAttribute('data-i18n-ph');
+      if (t[key] !== undefined) el.placeholder = t[key];
+    });
+
+    // Hero title especial: reconstruye los spans animables
+    const heroKey = 'hero.title';
+    if (t[heroKey]) {
+      const raw = t[heroKey];
+      // Palabras entre {} van en fuchsia
+      const full = raw.replace(/\{([^}]+)\}/g, '$1');
+      const fuchsiaWords = (raw.match(/\{([^}]+)\}/) || ['',''])[1].split(' ');
+      const heroEl = document.getElementById('hero-title');
+      heroEl.setAttribute('aria-label', full);
+      heroEl.innerHTML = full.split(' ').map(word => {
+        const isFuchsia = fuchsiaWords.includes(word);
+        return `<span class="hw${isFuchsia ? ' fuchsia' : ''}">${word}</span>`;
+      }).join(' ');
+    }
+
+    // Feedback del formulario si está activo
+    const sendBtn = document.querySelector('.btn-submit');
+    if (sendBtn && sendBtn._sent) sendBtn.textContent = t['contact.sent'];
+  }
+
+  // ── Menú hamburguesa
+</script>
 <script>
   // Menú hamburguesa
   const hamburger = document.getElementById('hamburger');
