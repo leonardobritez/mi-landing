@@ -3,7 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NexaTech — Soluciones de Software</title>
+
+  <!-- ── SEO: título y descripción ── -->
+  <title>NexaTech | Desarrollo de Software a Medida — Buenos Aires, Argentina</title>
+  <meta name="description" content="NexaTech desarrolla software a medida: plataformas web, apps móviles y sistemas empresariales. +120 proyectos entregados. Buenos Aires, Argentina." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://leonardobritez.github.io/mi-landing/" />
+
+  <!-- ── SEO: keywords y autor ── -->
+  <meta name="keywords" content="desarrollo de software, software a medida, aplicaciones web, apps móviles, sistemas empresariales, ERP, CRM, Buenos Aires, Argentina, NexaTech" />
+  <meta name="author" content="NexaTech" />
+
+  <!-- ── Open Graph (LinkedIn, Facebook, WhatsApp) ── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://leonardobritez.github.io/mi-landing/" />
+  <meta property="og:title"       content="NexaTech | Desarrollo de Software a Medida" />
+  <meta property="og:description" content="Desarrollamos soluciones digitales: plataformas web, apps móviles y sistemas empresariales que escalan con tu negocio. Buenos Aires, Argentina." />
+  <meta property="og:image"       content="https://leonardobritez.github.io/mi-landing/og-image.png" />
+  <meta property="og:locale"      content="es_AR" />
+  <meta property="og:site_name"   content="NexaTech" />
+
+  <!-- ── Twitter Card ── -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="NexaTech | Desarrollo de Software a Medida" />
+  <meta name="twitter:description" content="Desarrollamos soluciones digitales: plataformas web, apps móviles y sistemas empresariales. Buenos Aires, Argentina." />
+  <meta name="twitter:image"       content="https://leonardobritez.github.io/mi-landing/og-image.png" />
+
+  <!-- ── Schema.org JSON-LD ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://leonardobritez.github.io/mi-landing/#organization",
+        "name": "NexaTech",
+        "url": "https://leonardobritez.github.io/mi-landing/",
+        "logo": "https://leonardobritez.github.io/mi-landing/og-image.png",
+        "description": "Empresa de desarrollo de software a medida: plataformas web, apps móviles y sistemas empresariales.",
+        "foundingDate": "2017",
+        "numberOfEmployees": { "@type": "QuantitativeValue", "value": 15 },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Buenos Aires",
+          "addressCountry": "AR"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+54-11-5555-0000",
+          "email": "hola@nexatech.com",
+          "contactType": "customer support",
+          "availableLanguage": ["Spanish", "English"]
+        },
+        "sameAs": [
+          "https://github.com/leonardobritez/mi-landing"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://leonardobritez.github.io/mi-landing/#website",
+        "url": "https://leonardobritez.github.io/mi-landing/",
+        "name": "NexaTech",
+        "publisher": { "@id": "https://leonardobritez.github.io/mi-landing/#organization" },
+        "inLanguage": ["es", "en"]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://leonardobritez.github.io/mi-landing/#webpage",
+        "url": "https://leonardobritez.github.io/mi-landing/",
+        "name": "NexaTech | Desarrollo de Software a Medida — Buenos Aires",
+        "description": "NexaTech desarrolla software a medida: plataformas web, apps móviles y sistemas empresariales. +120 proyectos entregados.",
+        "isPartOf": { "@id": "https://leonardobritez.github.io/mi-landing/#website" },
+        "about": { "@id": "https://leonardobritez.github.io/mi-landing/#organization" },
+        "inLanguage": "es"
+      }
+    ]
+  }
+  </script>
   <style>
     /* ── LANG SWITCHER ── */
     .lang-switcher {
@@ -426,7 +502,7 @@
 </header>
 
 <!-- ────────── HERO ────────── -->
-<section id="inicio">
+<section id="inicio" aria-label="Inicio — NexaTech desarrollo de software">
   <div class="hero-inner">
     <span class="hero-badge" data-i18n="hero.badge">Innovación · Software · Tecnología</span>
     <h1 id="hero-title" data-i18n-hero="hero.title">
@@ -447,7 +523,7 @@
 </section>
 
 <!-- ────────── SOLUCIONES ────────── -->
-<section id="soluciones">
+<section id="soluciones" aria-label="Soluciones y servicios de NexaTech">
   <div class="section-inner">
     <span class="section-label" data-i18n="sol.label">Lo que hacemos</span>
     <h2 class="section-title"   data-i18n="sol.title">Nuestras soluciones</h2>
@@ -456,7 +532,7 @@
 
       <div class="card">
         <div class="card-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
         <h3 data-i18n="sol.c1.title">Desarrollo Web a medida</h3>
         <p  data-i18n="sol.c1.body">Plataformas y aplicaciones web modernas, rápidas y escalables, construidas con las tecnologías más actuales del mercado.</p>
@@ -464,7 +540,7 @@
 
       <div class="card">
         <div class="card-icon">
-          <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
         </div>
         <h3 data-i18n="sol.c2.title">Apps Móviles</h3>
         <p  data-i18n="sol.c2.body">Aplicaciones nativas e híbridas para iOS y Android con experiencias de usuario fluidas y rendimiento optimizado.</p>
@@ -472,7 +548,7 @@
 
       <div class="card">
         <div class="card-icon">
-          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
         <h3 data-i18n="sol.c3.title">Sistemas Empresariales</h3>
         <p  data-i18n="sol.c3.body">ERPs, CRMs y dashboards de gestión personalizados que automatizan procesos y centralizan la información de tu empresa.</p>
@@ -483,7 +559,7 @@
 </section>
 
 <!-- ────────── SOBRE NOSOTROS ────────── -->
-<section id="sobre-nosotros">
+<section id="sobre-nosotros" aria-label="Por qué elegirnos — Sobre NexaTech">
   <div class="section-inner">
     <div class="why-grid">
       <div class="why-text">
@@ -538,7 +614,7 @@
 </section>
 
 <!-- ────────── CONTACTO ────────── -->
-<section id="contacto">
+<section id="contacto" aria-label="Formulario de contacto — NexaTech">
   <div class="section-inner">
     <div class="contact-grid">
       <div class="contact-info">
@@ -546,15 +622,15 @@
         <h2 class="section-title"   data-i18n="contact.title">¿Tenés un proyecto en mente?</h2>
         <p data-i18n="contact.body">Contanos tu idea y te respondemos en menos de 24 hs con una propuesta inicial sin compromiso.</p>
         <div class="contact-detail">
-          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           <span>hola@nexatech.com</span>
         </div>
         <div class="contact-detail">
-          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82 19.79 19.79 0 01.4 1.21 2 2 0 012.39-.01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82 19.79 19.79 0 01.4 1.21 2 2 0 012.39-.01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
           <span>+54 11 5555-0000</span>
         </div>
         <div class="contact-detail">
-          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
           <span>Buenos Aires, Argentina</span>
         </div>
       </div>
