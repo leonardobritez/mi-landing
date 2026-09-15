@@ -106,6 +106,54 @@
     }
   </style>
   <style>
+    /* ── GLOW CURSOR ── */
+    #glow-cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(
+        circle,
+        rgba(236, 72, 153, 0.18) 0%,
+        rgba(236, 72, 153, 0.07) 35%,
+        transparent 70%
+      );
+      transition: opacity 0.4s ease;
+      will-change: transform;
+    }
+    #glow-cursor.hidden { opacity: 0; }
+
+    /* anillo interior más nítido */
+    #glow-cursor::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: rgba(236, 72, 153, 0.7);
+      box-shadow: 0 0 12px 4px rgba(236, 72, 153, 0.5);
+      transition: transform 0.15s ease, opacity 0.3s ease;
+    }
+
+    /* cuando está sobre un elemento clickeable, crece */
+    body.cursor-hover #glow-cursor::after {
+      transform: translate(-50%, -50%) scale(2.5);
+      opacity: 0.4;
+    }
+    body.cursor-hover #glow-cursor {
+      background: radial-gradient(
+        circle,
+        rgba(236, 72, 153, 0.28) 0%,
+        rgba(236, 72, 153, 0.1) 35%,
+        transparent 70%
+      );
+    }
+  </style>
+  <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -909,6 +957,58 @@
 
     };
     document.head.appendChild(script);
+  })();
+</script>
+
+<script>
+  // ── GLOW CURSOR ──────────────────────────────────────────────────────
+  (function () {
+    // No activar en dispositivos táctiles
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    const glow = document.createElement('div');
+    glow.id = 'glow-cursor';
+    glow.classList.add('hidden');
+    document.body.appendChild(glow);
+
+    let mouseX = 0, mouseY = 0;
+    let curX   = 0, curY   = 0;
+    let raf;
+
+    // Seguimiento suave con lerp
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function loop() {
+      curX = lerp(curX, mouseX, 0.1);
+      curY = lerp(curY, mouseY, 0.1);
+      glow.style.left = curX + 'px';
+      glow.style.top  = curY + 'px';
+      raf = requestAnimationFrame(loop);
+    }
+
+    document.addEventListener('mousemove', function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      glow.classList.remove('hidden');
+      if (!raf) loop();
+    });
+
+    document.addEventListener('mouseleave', function () {
+      glow.classList.add('hidden');
+    });
+
+    // Efecto hover sobre interactivos
+    const interactors = 'a, button, input, textarea, [role="button"]';
+    document.addEventListener('mouseover', function (e) {
+      if (e.target.closest(interactors)) {
+        document.body.classList.add('cursor-hover');
+      }
+    });
+    document.addEventListener('mouseout', function (e) {
+      if (e.target.closest(interactors)) {
+        document.body.classList.remove('cursor-hover');
+      }
+    });
   })();
 </script>
 </body>
