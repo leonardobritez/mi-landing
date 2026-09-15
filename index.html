@@ -117,8 +117,8 @@
       transform: translate(-50%, -50%);
       background: radial-gradient(
         circle,
-        rgba(236, 72, 153, 0.18) 0%,
-        rgba(236, 72, 153, 0.07) 35%,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.04) 35%,
         transparent 70%
       );
       transition: opacity 0.4s ease;
@@ -134,8 +134,8 @@
       transform: translate(-50%, -50%);
       width: 12px; height: 12px;
       border-radius: 50%;
-      background: rgba(236, 72, 153, 0.7);
-      box-shadow: 0 0 12px 4px rgba(236, 72, 153, 0.5);
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.4);
       transition: transform 0.15s ease, opacity 0.3s ease;
     }
 
@@ -147,8 +147,8 @@
     body.cursor-hover #glow-cursor {
       background: radial-gradient(
         circle,
-        rgba(236, 72, 153, 0.28) 0%,
-        rgba(236, 72, 153, 0.1) 35%,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0.07) 35%,
         transparent 70%
       );
     }
@@ -969,9 +969,9 @@
     const SPRING  = 0.12;     // rigidez del resorte
     const DAMPING = 0.78;     // amortiguación (0-1, más bajo = más cola)
     const COLORS  = [
-      'rgba(236,72,153,VAL)',  // fucsia principal
-      'rgba(190,24,93,VAL)',   // fucsia oscuro
-      'rgba(168,85,247,VAL)',  // violeta
+      'rgba(255,255,255,VAL)',  // blanco principal
+      'rgba(220,220,230,VAL)',  // blanco azulado
+      'rgba(200,200,220,VAL)',  // blanco suave
     ];
 
     let mouseX = 0, mouseY = 0;
@@ -1074,8 +1074,8 @@
           'pointer-events:none',
           'width:'  + size + 'px',
           'height:' + size + 'px',
-          'background:rgba(236,72,153,0.9)',
-          'box-shadow:0 0 8px rgba(236,72,153,0.8)',
+          'background:rgba(255,255,255,0.9)',
+          'box-shadow:0 0 8px rgba(255,255,255,0.7)',
           'transform:translate(-50%,-50%)',
           'left:' + e.clientX + 'px',
           'top:'  + e.clientY + 'px',
