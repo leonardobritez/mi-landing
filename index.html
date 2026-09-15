@@ -1136,7 +1136,7 @@
       void main(){
         vec3 c = texture2D(uTexture, vUv).rgb;
         float a = max(c.r, max(c.g, c.b));
-        gl_FragColor = vec4(c, a * 0.92);
+        gl_FragColor = vec4(c, a * 0.55);
       }`;
 
     // ── Compilar programas ───────────────────────────────────────────────
@@ -1307,7 +1307,7 @@
 
       // Display
       gl.enable(gl.BLEND);
-      gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
       bindQuad(pDisplay);
       gl.uniform1i(gl.getUniformLocation(pDisplay,'uTexture'), density.read.attach(0));
       blit(null);
