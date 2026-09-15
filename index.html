@@ -961,6 +961,141 @@
 </script>
 
 <script>
+  // ── SWARM CURSOR ─────────────────────────────────────────────────────
+  (function () {
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    const COUNT   = 28;       // cantidad de partículas
+    const SPRING  = 0.12;     // rigidez del resorte
+    const DAMPING = 0.78;     // amortiguación (0-1, más bajo = más cola)
+    const COLORS  = [
+      'rgba(236,72,153,VAL)',  // fucsia principal
+      'rgba(190,24,93,VAL)',   // fucsia oscuro
+      'rgba(168,85,247,VAL)',  // violeta
+    ];
+
+    let mouseX = 0, mouseY = 0;
+    let isVisible = false;
+
+    // Contenedor
+    const container = document.createElement('div');
+    container.style.cssText = 'position:fixed;top:0;left:0;width:0;height:0;pointer-events:none;z-index:9998;';
+    document.body.appendChild(container);
+
+    // Crear partículas
+    const particles = Array.from({ length: COUNT }, function (_, i) {
+      const el = document.createElement('div');
+      const progress = i / COUNT;                        // 0 → 1
+      const size  = Math.round(8 - progress * 5);       // 8px → 3px
+      const alpha = (1 - progress * 0.7).toFixed(2);   // 1 → 0.3
+      const color = COLORS[i % COLORS.length].replace('VAL', alpha);
+
+      el.style.cssText = [
+        'position:fixed',
+        'border-radius:50%',
+        'pointer-events:none',
+        'will-change:transform',
+        'opacity:0',
+        'transition:opacity 0.3s',
+        'width:'  + size + 'px',
+        'height:' + size + 'px',
+        'background:' + color,
+        'box-shadow:0 0 ' + (size * 2) + 'px ' + color,
+        'transform:translate(-50%,-50%)',
+      ].join(';');
+
+      document.body.appendChild(el);
+
+      return {
+        el,
+        x: 0, y: 0,   // posición actual
+        vx: 0, vy: 0, // velocidad
+      };
+    });
+
+    function show() {
+      if (isVisible) return;
+      isVisible = true;
+      particles.forEach(function (p) { p.el.style.opacity = '1'; });
+    }
+    function hide() {
+      if (!isVisible) return;
+      isVisible = false;
+      particles.forEach(function (p) { p.el.style.opacity = '0'; });
+    }
+
+    document.addEventListener('mousemove', function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      show();
+    });
+    document.addEventListener('mouseleave', hide);
+
+    // Loop de física
+    let targetX = mouseX, targetY = mouseY;
+
+    (function loop() {
+      requestAnimationFrame(loop);
+      if (!isVisible) return;
+
+      // La primera partícula sigue directamente al mouse
+      // Cada siguiente sigue a la anterior → efecto cola
+      let prevX = mouseX, prevY = mouseY;
+
+      particles.forEach(function (p, i) {
+        const stiffness = SPRING * (1 - i / COUNT * 0.4); // resorte más flojo al final
+        const dx = prevX - p.x;
+        const dy = prevY - p.y;
+
+        p.vx = (p.vx + dx * stiffness) * DAMPING;
+        p.vy = (p.vy + dy * stiffness) * DAMPING;
+        p.x += p.vx;
+        p.y += p.vy;
+
+        p.el.style.left = p.x + 'px';
+        p.el.style.top  = p.y + 'px';
+
+        prevX = p.x;
+        prevY = p.y;
+      });
+    })();
+
+    // Efecto burst al hacer click
+    document.addEventListener('click', function (e) {
+      const burst = 10;
+      for (let i = 0; i < burst; i++) {
+        const dot = document.createElement('div');
+        const angle  = (Math.PI * 2 / burst) * i;
+        const radius = 30 + Math.random() * 30;
+        const size   = 4 + Math.random() * 4;
+        dot.style.cssText = [
+          'position:fixed',
+          'border-radius:50%',
+          'pointer-events:none',
+          'width:'  + size + 'px',
+          'height:' + size + 'px',
+          'background:rgba(236,72,153,0.9)',
+          'box-shadow:0 0 8px rgba(236,72,153,0.8)',
+          'transform:translate(-50%,-50%)',
+          'left:' + e.clientX + 'px',
+          'top:'  + e.clientY + 'px',
+          'transition:all 0.5s cubic-bezier(.17,.67,.35,1)',
+          'z-index:9997',
+        ].join(';');
+        document.body.appendChild(dot);
+        requestAnimationFrame(function () {
+          dot.style.left      = (e.clientX + Math.cos(angle) * radius) + 'px';
+          dot.style.top       = (e.clientY + Math.sin(angle) * radius) + 'px';
+          dot.style.opacity   = '0';
+          dot.style.transform = 'translate(-50%,-50%) scale(0)';
+        });
+        setTimeout(function () { dot.remove(); }, 550);
+      }
+    });
+  })();
+</script>
+
+<script>
   // ── GLOW CURSOR ──────────────────────────────────────────────────────
   (function () {
     // No activar en dispositivos táctiles
